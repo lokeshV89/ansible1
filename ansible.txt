@@ -1,0 +1,68 @@
+----for centos-----
+1.  dnf -y install epel-release.
+2.  dnf makecache
+3.  dnf -y install python39 
+    pip3 install ansible 
+    dnf -y install ansible
+4.  ansible --version
+
+----for rhel----
+1.  subscription-manager register
+2.  subscription-manager role --set="Red Hat Enterprise Linux Server"
+3.  subscription-manager list --available
+4.  subscription-manager attach --pool=<engine-subscription-pool>
+5.  subscription-manager repos --enable ansible-2.8-for-rhel-8-x86_64-rpms
+6.  dnf -y install python39
+    pip3 install ansible
+    dnf -y install ansible
+
+----keygen and exchange pro----
+1.  ssh-keygen
+    enter file name(/home/.ssh/id_rsa)
+    enter passphrase(you can leave empty)
+    confirm
+    ssh-copy-id root@192.168.43.155
+    enterpassword
+    password less auth enabled
+
+----ansible-doc----
+1.  ansible-doc -l
+2.  ansible-doc | grep yum
+3.  ansible-doc copy(it will give man as well as examples)
+
+    
+
+----ansible ops----
+1.  ansible --version
+2.  vim /etc/ansible/hosts
+     ##add group name and ip at the end of file
+     [webserver]
+     192.168.43.155
+3.  ansible all --list-host
+4.  ansible ungrouped --list-host(for all ungrouped list)
+5.  ansible -i /etc/ansible/hosts web -m ping
+    ##it will give reply if successfully con established
+6.  cd /root/deploy-inventory(for custom static inventory /root can be /home/homedir)
+    vim inventory
+    [webservers]
+    192.168.43.155
+7.  ansible all -i inventory --list-host(in place of all we can user groupname webserver)
+
+----adhoc cmds----(cmds without using playbook)
+1.  ansible all -m ping (-m module diff modules are available)
+    ansible all -m command -a hostname (-a argument)
+    ansible all -m command -a uptime
+    ansible all -m command -a 'uname -a'
+    ansible webserver -m copy -a "src=/root/ansibletest2 dest=/root/ansibletest2"
+    ansible webserver -m copy -a "content='this is test\n by lokesh' dest=/root/ansibletest"
+    ansible webserver -m command -a 'cat /root/ansibletest2'
+2.  ansible werser -m setup (to see ansible facts)
+
+
+
+
+
+
+
+
+ 
