@@ -1,0 +1,13 @@
+---
+- name: getting php info
+  hosts: webserver
+  tasks:
+    - name: running php cmd
+      shell:
+        cmd: "php --version"
+      args:
+        chdir: /etc/php.d/
+      register: phpversion
+      tags: phpversion
+
+    - debug: msg="{{phpversion.stdout_lines}}"

@@ -1,0 +1,12 @@
+---
+- name: getting storage analysis
+  hosts: webserver
+  tasks:
+    - name: getting storage detail
+      shell:
+        cmd: "ls -alh"
+      args:
+        chdir: /
+      register: storage
+      tags: storage
+    - debug: msg="{{storage.stdout_lines}}"

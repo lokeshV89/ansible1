@@ -1,0 +1,10 @@
+---
+- name: configureing imp users
+  hosts: webserver
+  tasks:
+    - name: test1 user with uid 4000
+      user:
+       name: test1
+       uid: 4000
+       state: present
+

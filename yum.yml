@@ -1,0 +1,21 @@
+---
+- name: play to setup web server  
+  hosts: webserver  
+  tasks:  
+    - name: latest httpd version installed    
+      yum:      
+        name: httpd      
+        state: latest
+    - name: httpd is started
+      service:
+        name: httpd
+        state: started
+        enabled: true
+    - name: move index file
+      copy:
+        src: /root/index.php
+        dest: /var/www/html/
+    - name: latest php version
+      yum:
+        name: php
+        state: latest
